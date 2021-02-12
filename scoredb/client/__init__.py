@@ -2,7 +2,7 @@ from typing import List
 
 from requests import Session
 
-from .baseapi import BaseAPI
+from ._baseapi import BaseAPI
 from .studentdb import StudentDBAPI
 from .users import UsersAPI
 from ..models import User

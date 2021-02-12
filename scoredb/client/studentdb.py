@@ -2,11 +2,13 @@ from typing import Union, List
 
 from requests import Session
 
-from .baseapi import BaseAPI
+from ._baseapi import BaseAPI
+from ._pagination import Pagination
 from ..models import GradeSummary, Grade, ClassSummary, Class, StudentSummary, Student
 
 
 class StudentDBAPI(BaseAPI):
+
     def __init__(self, session: Session, base_url: str):
         super().__init__(session, base_url + '/studentdb')
 
@@ -40,3 +42,18 @@ class StudentDBAPI(BaseAPI):
             else:
                 student = student.id
         return self.get_student_details(student, True).photos
+
+    def search_student(self, query: str, page: int = 1) -> Pagination[StudentSummary]:
+        if not query:
+            raise ValueError('Empty query.')
+        result = self.request('GET', '/search', params={
+            'query': query,
+            'page': page
+        })
+
+        result['data'] = [StudentSummary(**student) for student in result['data']]
+
+        def switch_page_fn(new_page: int):
+            return self.search_student(query, new_page)
+
+        return Pagination(**result, switch_page_fn=switch_page_fn)
