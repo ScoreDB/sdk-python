@@ -9,7 +9,6 @@ from ..models import User
 
 
 class Client:
-
     user: User
 
     def __init__(self, token: str, base_url='https://api.scoredb.tech'):

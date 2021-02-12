@@ -2,6 +2,7 @@ from requests import Session
 
 
 class BaseAPI:
+
     def __init__(self, session: Session, base_url: str):
         self.session = session
         self.base_url = base_url
