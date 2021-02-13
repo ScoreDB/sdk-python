@@ -18,6 +18,9 @@ class Pagination(Generic[T]):
             raise ValueError('Invalid current page number.')
         self.switch_page_fn = switch_page_fn
 
+    def count(self):
+        return len(self.data)
+
     def has_previous_page(self):
         return self.current_page > 1
 

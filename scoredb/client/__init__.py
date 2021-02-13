@@ -3,6 +3,7 @@ from typing import List
 from requests import Session
 
 from ._baseapi import BaseAPI
+from ._pagination import Pagination
 from .studentdb import StudentDBAPI
 from .users import UsersAPI
 from ..models import User
