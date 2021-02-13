@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "scoredb-sdk"
-version = "0.1.1"
+version = "0.1.2"
 description = "Python SDK of the ScoreDB v3 API Server."
 license = "GPL-3.0-or-later"
 authors = ["JingBh <jingbohao@yeah.net>"]
