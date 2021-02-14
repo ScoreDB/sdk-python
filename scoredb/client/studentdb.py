@@ -43,12 +43,13 @@ class StudentDBAPI(BaseAPI):
                 student = student.id
         return self.get_student_details(student, True).photos
 
-    def search_student(self, query: str, page: int = 1) -> Pagination[StudentSummary]:
+    def search_student(self, query: str, page: int = 1, page_size: int = 9) -> Pagination[StudentSummary]:
         if not query:
             raise ValueError('Empty query.')
         result = self.request('GET', '/search', params={
             'query': query,
-            'page': page
+            'page': page,
+            'page_size': page_size
         })
 
         result['data'] = [StudentSummary(**student) for student in result['data']]
